@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://b26ehcc0hd4qa"]
+
+[ext_resource type="PackedScene" uid="uid://d07x20kjtdm1s" path="res://Weapons/weapon_template.tscn" id="1_quojc"]
+
+[sub_resource type="Animation" id="Animation_q317d"]
+resource_name = "attack"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponTexture:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_s3vad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponTexture:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldnhy"]
+_data = {
+"RESET": SubResource("Animation_s3vad"),
+"attack": SubResource("Animation_q317d")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cg6xe"]
+size = Vector2(21.9999, 35.7096)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_koaon"]
+radius = 34.5398
+
+[node name="ShortSword" instance=ExtResource("1_quojc")]
+
+[node name="WeaponTexture" parent="." index="0"]
+offset = Vector2(0, -20)
+flip_h = true
+region_rect = Rect2(0.818253, 577.909, 60.9091, 59.0909)
+
+[node name="Arm_1" parent="." index="1"]
+position = Vector2(593, 352)
+rotation = 0.0350786
+offset = Vector2(0, -20)
+region_rect = Rect2(63.3743, 513.706, 65.8177, 62.0922)
+
+[node name="Animation" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_ldnhy")
+}
+
+[node name="AttackArea" parent="." index="4"]
+position = Vector2(-142.854, -201.796)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2(735.854, 507.941)
+shape = SubResource("RectangleShape2D_cg6xe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
+position = Vector2(594, 315)
+shape = SubResource("CircleShape2D_koaon")

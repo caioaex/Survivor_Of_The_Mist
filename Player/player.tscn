@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://muivdy46s2a1"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_8g0cp"]
+[ext_resource type="Texture2D" uid="uid://clq2t4ynvw1y6" path="res://assets/tilesheet.png" id="1_ui1hs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70r0b"]
+radius = 20.0998
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-575, -333)
+script = ExtResource("1_8g0cp")
+
+[node name="texture" type="Sprite2D" parent="."]
+position = Vector2(595, 341)
+texture = ExtResource("1_ui1hs")
+region_enabled = true
+region_rect = Rect2(1.09282, 513.893, 62.9072, 63.5203)
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(597, 330)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(594, 339)
+shape = SubResource("CircleShape2D_70r0b")
+
+[node name="WeaponsManager" type="Node2D" parent="."]
+
+[node name="Weapon_1" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(556, 336)
+
+[node name="WeaponTexture" type="Sprite2D" parent="WeaponsManager/Weapon_1"]
+
+[node name="Weapon_2" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(571, 304)
+
+[node name="Weapon_3" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(614, 304)
+
+[node name="Weapon_4" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(632, 336)
+
+[node name="Weapon_5" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(614, 373)
+
+[node name="Weapon_6" type="Marker2D" parent="WeaponsManager"]
+position = Vector2(571, 373)

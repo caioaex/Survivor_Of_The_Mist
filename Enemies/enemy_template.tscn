@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnktthgl5t610"]
+
+[ext_resource type="Texture2D" uid="uid://clq2t4ynvw1y6" path="res://assets/tilesheet.png" id="1_62by8"]
+
+[node name="EnemyTemplate" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_62by8")
+region_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

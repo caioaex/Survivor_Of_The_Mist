@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcddna1bdm1p1"]
+
+[ext_resource type="PackedScene" uid="uid://k5wyf6um0u52" path="res://terrains/base_terrain.tscn" id="1_fw1lk"]
+
+[node name="Terrain" instance=ExtResource("1_fw1lk")]
+layer_1/tile_data = PackedInt32Array(65538, 327680, 2, 524290, 327680, 2, 589828, 393216, 2, 589844, 196608, 6, 131080, 393216, 7, 327696, 393216, 7, 458762, 393216, 7, 65555, 327680, 2, 262145, 196608, 7)
