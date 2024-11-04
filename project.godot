@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Survivor Of The Mist"
+run/main_scene="res://Management/game_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+global="*res://Management/global.gd"
 
 [display]
 

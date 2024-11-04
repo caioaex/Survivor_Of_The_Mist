@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhhsni7psmffx"]
+[gd_scene load_steps=4 format=3 uid="uid://bhhsni7psmffx"]
 
 [ext_resource type="PackedScene" uid="uid://bcddna1bdm1p1" path="res://levels/level.tscn" id="1_144t8"]
 [ext_resource type="PackedScene" uid="uid://muivdy46s2a1" path="res://Player/player.tscn" id="2_6qgey"]
+[ext_resource type="PackedScene" uid="uid://8qjg52i2kyr4" path="res://Enemies/enemy_green.tscn" id="3_g2m43"]
 
 [node name="GameLevel" type="Node2D"]
 
 [node name="Terrain" parent="." instance=ExtResource("1_144t8")]
 
 [node name="Player" parent="." instance=ExtResource("2_6qgey")]
-position = Vector2(191, 223)
+position = Vector2(848, 564)
+
+[node name="EnemyGreen" parent="." instance=ExtResource("3_g2m43")]
+position = Vector2(509, 316)
+
+[node name="EnemyGreen2" parent="." instance=ExtResource("3_g2m43")]
+position = Vector2(716, 243)
+
+[node name="EnemyGreen3" parent="." instance=ExtResource("3_g2m43")]
+position = Vector2(981, 227)

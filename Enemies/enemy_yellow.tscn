@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_elcgm"]
 
 [node name="EnemyYellow" instance=ExtResource("1_elcgm")]
+_move_speed = 240.0
 
 [node name="Sprite2D" parent="." index="0"]
 region_rect = Rect2(257.542, 513.853, 62.0725, 60.5303)
