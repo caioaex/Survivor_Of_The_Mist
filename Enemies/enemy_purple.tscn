@@ -4,7 +4,7 @@
 
 [node name="EnemyPurple" instance=ExtResource("1_5bstr")]
 _enemy_type = "chase_and_dash"
-_move_speed = 256.0
+_move_speed = 224.0
 
 [node name="Sprite2D" parent="." index="0"]
 region_rect = Rect2(128.842, 512.347, 64.6131, 60.8566)

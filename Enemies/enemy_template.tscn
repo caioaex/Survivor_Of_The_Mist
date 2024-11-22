@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnktthgl5t610"]
+[gd_scene load_steps=6 format=3 uid="uid://dnktthgl5t610"]
 
 [ext_resource type="Texture2D" uid="uid://clq2t4ynvw1y6" path="res://assets/tilesheet.png" id="1_62by8"]
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_ww7j5"]
@@ -8,8 +8,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_o6q0n"]
 radius = 96.0
 
-[node name="EnemyTemplate" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1wug"]
+radius = 16.0
+
+[node name="EnemyTemplate" type="CharacterBody2D" node_paths=PackedStringArray("_dash_wait_time", "_dash_timer")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_ww7j5")
+_dash_wait_time = NodePath("DashWaitTime")
+_dash_timer = NodePath("DashTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_62by8")
@@ -27,5 +34,16 @@ shape = SubResource("CircleShape2D_o6q0n")
 [node name="DashWaitTime" type="Timer" parent="."]
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="HitBoxArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="HitBoxArea"]
+shape = SubResource("CircleShape2D_m1wug")
+
 [connection signal="body_entered" from="RangeArea" to="." method="_on_range_area_body_entered"]
 [connection signal="timeout" from="DashWaitTime" to="." method="_on_dash_wait_time_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="body_entered" from="HitBoxArea" to="." method="_on_hit_box_area_body_entered"]
