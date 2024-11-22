@@ -3,8 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_5bstr"]
 
 [node name="EnemyPurple" instance=ExtResource("1_5bstr")]
+_health = 45
 _enemy_type = "chase_and_dash"
 _move_speed = 224.0
+_damage = 9
+_invincibility_cooldown = 1.25
 
-[node name="Sprite2D" parent="." index="0"]
-region_rect = Rect2(128.842, 512.347, 64.6131, 60.8566)
+[node name="Texture" parent="." index="0"]
+region_rect = Rect2(128, 515, 66, 61)

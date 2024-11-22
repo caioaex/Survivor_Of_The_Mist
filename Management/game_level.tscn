@@ -1,15 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhhsni7psmffx"]
+[gd_scene load_steps=5 format=3 uid="uid://bhhsni7psmffx"]
 
 [ext_resource type="PackedScene" uid="uid://bcddna1bdm1p1" path="res://levels/level.tscn" id="1_144t8"]
 [ext_resource type="PackedScene" uid="uid://muivdy46s2a1" path="res://Player/player.tscn" id="2_6qgey"]
-[ext_resource type="PackedScene" uid="uid://8qjg52i2kyr4" path="res://Enemies/enemy_green.tscn" id="3_g2m43"]
+[ext_resource type="Script" path="res://Management/wave_manager.gd" id="3_s6i3b"]
+[ext_resource type="PackedScene" uid="uid://ie8gag606ha" path="res://Management/wave_spot.tscn" id="4_mwirl"]
 
 [node name="GameLevel" type="Node2D"]
+show_behind_parent = true
 
 [node name="Terrain" parent="." instance=ExtResource("1_144t8")]
+show_behind_parent = true
+light_mask = 4
+visibility_layer = 4
 
 [node name="Player" parent="." instance=ExtResource("2_6qgey")]
-position = Vector2(852, 500)
+position = Vector2(876, 393)
 
-[node name="EnemyGreen" parent="." instance=ExtResource("3_g2m43")]
-position = Vector2(242, 191)
+[node name="WaveManager" type="Node2D" parent="." node_paths=PackedStringArray("_wave_timer", "_wave_spawner_timer")]
+script = ExtResource("3_s6i3b")
+_wave_timer = NodePath("WaveTimer")
+_wave_spawner_timer = NodePath("WaveSpawnCooldown")
+
+[node name="WaveSpot" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(272, 129)
+
+[node name="WaveSpot2" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(442, 568)
+
+[node name="WaveSpot3" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(714, 130)
+
+[node name="WaveSpot4" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(1095, 540)
+
+[node name="WaveSpot5" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(1192, 219)
+
+[node name="WaveSpot6" parent="WaveManager" instance=ExtResource("4_mwirl")]
+position = Vector2(754, 567)
+
+[node name="WaveTimer" type="Timer" parent="WaveManager"]
+one_shot = true
+
+[node name="WaveSpawnCooldown" type="Timer" parent="WaveManager"]
+one_shot = true
+
+[connection signal="timeout" from="WaveManager/WaveTimer" to="WaveManager" method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="WaveManager/WaveSpawnCooldown" to="WaveManager" method="_on_wave_spawn_cooldown_timeout"]

@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d07x20kjtdm1s"]
+[gd_scene load_steps=3 format=3 uid="uid://d07x20kjtdm1s"]
 
+[ext_resource type="Script" path="res://Weapons/base_weapon.gd" id="1_armel"]
 [ext_resource type="Texture2D" uid="uid://clq2t4ynvw1y6" path="res://assets/tilesheet.png" id="1_hjp8h"]
 
-[node name="WeaponTemplate" type="Node2D"]
+[node name="WeaponTemplate" type="Node2D" node_paths=PackedStringArray("_attack_timer", "_animation", "_detectionArea")]
+script = ExtResource("1_armel")
+_attack_timer = NodePath("AttackTimer")
+_animation = NodePath("Animation")
+_detectionArea = NodePath("DetectionArea")
 
 [node name="WeaponTexture" type="Sprite2D" parent="."]
 position = Vector2(594, 330)
@@ -22,5 +27,16 @@ region_enabled = true
 [node name="Animation" type="AnimationPlayer" parent="."]
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

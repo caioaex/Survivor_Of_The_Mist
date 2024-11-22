@@ -3,7 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_h5bco"]
 
 [node name="EnemyGreen" instance=ExtResource("1_h5bco")]
+_health = 15
 _move_speed = 176.0
+_damage = 2
+_invincibility_cooldown = 1.5
 
-[node name="Sprite2D" parent="." index="0"]
-region_rect = Rect2(384.487, 512.526, 63.6316, 61.0659)
+[node name="Texture" parent="." index="0"]
+region_rect = Rect2(384, 515, 66, 59)
+
+[node name="Dust" parent="." index="6"]
+show_behind_parent = true
