@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://8qjg52i2kyr4"]
+[gd_scene load_steps=4 format=3 uid="uid://8qjg52i2kyr4"]
 
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_h5bco"]
+[ext_resource type="Shader" path="res://Effects/flash.gdshader" id="2_42vjg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwwam"]
+resource_local_to_scene = true
+shader = ExtResource("2_42vjg")
+shader_parameter/is_active = false
 
 [node name="EnemyGreen" instance=ExtResource("1_h5bco")]
 _health = 15
@@ -9,7 +15,5 @@ _damage = 2
 _invincibility_cooldown = 1.5
 
 [node name="Texture" parent="." index="0"]
+material = SubResource("ShaderMaterial_gwwam")
 region_rect = Rect2(384, 515, 66, 59)
-
-[node name="Dust" parent="." index="6"]
-show_behind_parent = true

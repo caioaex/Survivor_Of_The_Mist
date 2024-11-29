@@ -9,12 +9,9 @@ var _waves_dict: Dictionary = {
 		"spots_amount": [3, 6],
 		"wave_difficulty": "easy"
 	},
-	2: {
-		
-	},
-	3: {
-		
-	}
+	2: {},
+	3: {},
+	4: {}
 }
 
 var _current_wave: int = 1
@@ -56,10 +53,27 @@ func _spawn_enemies() -> void:
 	
 	for _spot in _spawn_spots:
 		var _childrens: Array = []
+		var _selected_childrens: Array = []
 		for _children in _spot.get_children():
 			_childrens.append(_children)
 			
-		var _amount_list : Array = _waves_dict[_current_wave]["wave_amount"]
+		var _amount_list : Array = _waves_dict[_current_wave]["spots_amount"]
 		var _selected_amount: int = randi_range(_amount_list[0], _amount_list[1])
 		for _i in _selected_amount:
 			var _index: int = randi() % _childrens.size()
+			var _selected_spot: Node2D = _childrens[_index]
+			_selected_childrens.append(_selected_spot)
+			_childrens.remove_at(_index)
+			
+		for _spawner in _selected_childrens:
+			_spawn_enemy(_spawner)
+			pass
+
+
+func _spawn_enemy(_spawner: Node2D) -> void:
+	var _difficulty : String = _waves_dict[_current_wave]["wave_difficulty"]
+	match _difficulty:
+		"easy":
+			pass
+	
+
