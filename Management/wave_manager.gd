@@ -1,6 +1,10 @@
 extends Node2D
 class_name WaveManager
 
+const _GREEN_ENEMY: PackedScene = preload("res://Enemies/enemy_green.tscn")
+const _YELLOW_ENEMY: PackedScene = preload("res://Enemies/enemy_yellow.tscn")
+const _PURPLE_ENEMY: PackedScene = preload("res://Enemies/enemy_purple.tscn")
+
 var _waves_dict: Dictionary = {
 	1: {
 		"wave_time": 20,
@@ -9,9 +13,69 @@ var _waves_dict: Dictionary = {
 		"spots_amount": [3, 6],
 		"wave_difficulty": "easy"
 	},
-	2: {},
-	3: {},
-	4: {}
+	2: {
+		"wave_time": 25,
+		"wave_amount": 2,
+		"wave_spawn_cooldown": 5,
+		"spots_amount": [2, 4],
+		"wave_difficulty": "easy_to_medium"
+	},
+	3: {
+		"wave_time": 30,
+		"wave_amount": 3,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "easy_to_medium"
+	},
+	4: {
+		"wave_time": 35,
+		"wave_amount": 4,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "medium"
+	},
+	5:{
+		"wave_time": 40,
+		"wave_amount": 5,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "medium"
+	},
+	6: {
+		"wave_time": 45,
+		"wave_amount": 6,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "medium_to_hard"
+	},
+	7: {
+		"wave_time": 50,
+		"wave_amount": 6,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "medium_to_hard"
+	},
+	8: {
+		"wave_time": 60,
+		"wave_amount": 6,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "hard"
+	},
+	9: {
+		"wave_time": 65,
+		"wave_amount": 6,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "hard"
+	}, 
+	10: {
+		"wave_time": 70,
+		"wave_amount": 6,
+		"wave_spawn_cooldown": 4,
+		"spots_amount": [3, 6],
+		"wave_difficulty": "hard"
+	}
 }
 
 var _current_wave: int = 1
@@ -19,8 +83,10 @@ var _current_wave: int = 1
 @export_category("Objects")
 @export var _wave_timer: Timer
 @export var _wave_spawner_timer: Timer
+@export var _interface: CanvasLayer = null
 
 func _ready() -> void:
+	_wave_spawner_timer.start(_waves_dict[_current_wave]["wave_spawn_cooldown"])
 	_wave_timer.start(_waves_dict[_current_wave]["wave_time"])
 	_spawn_enemies()
 	
@@ -71,9 +137,39 @@ func _spawn_enemies() -> void:
 
 
 func _spawn_enemy(_spawner: Node2D) -> void:
+	var _enemy: Enemy = null
+	var _randf: float = randf()
 	var _difficulty : String = _waves_dict[_current_wave]["wave_difficulty"]
 	match _difficulty:
 		"easy":
-			pass
-	
+			_enemy = _GREEN_ENEMY.instantiate()
+		"easy_to_medium":
+			if _randf <= 0.7: 
+				_enemy = _GREEN_ENEMY.instantiate()
+			else:
+				_enemy = _YELLOW_ENEMY.instantiate()
+		"medium":
+			if _randf <= 0.5: 
+				_enemy = _GREEN_ENEMY.instantiate()
+			else:
+				_enemy = _YELLOW_ENEMY.instantiate()
+		"medium_to_hard":
+			if _randf <= 0.4: 
+				_enemy = _GREEN_ENEMY.instantiate()
+			elif _randf > 0.4 and _randf <= 0.9:
+				_enemy = _YELLOW_ENEMY.instantiate()
+			else:
+				_enemy = _PURPLE_ENEMY.instantiate() 
+		"hard":
+			if _randf <= 0.2: 
+				_enemy = _GREEN_ENEMY.instantiate()
+			elif _randf > 0.2 and _randf <= 0.8:
+				_enemy = _YELLOW_ENEMY.instantiate()
+			else:
+				_enemy = _PURPLE_ENEMY.instantiate() 
+	_enemy.global_position = _spawner.global_position
+	get_parent().call_deferred("add_child", _enemy)
 
+
+func _on_current_time_timer_timeout():
+	_interface.update_wave_and_time_label(_current_wave, _wave_timer.time_left)
