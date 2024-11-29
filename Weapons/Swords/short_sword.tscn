@@ -68,9 +68,10 @@ _data = {
 size = Vector2(21.9999, 35.7096)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_koaon"]
-radius = 34.5398
+radius = 32.76
 
 [node name="ShortSword" instance=ExtResource("1_quojc")]
+_attack_damage = 5
 
 [node name="WeaponTexture" parent="." index="0"]
 offset = Vector2(0, -20)

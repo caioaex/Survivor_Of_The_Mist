@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://5dxt6p0giqym"]
+[gd_scene load_steps=4 format=3 uid="uid://5dxt6p0giqym"]
 
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_elcgm"]
+[ext_resource type="Shader" path="res://Effects/flash.gdshader" id="2_bj7yn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wj57"]
+resource_local_to_scene = true
+shader = ExtResource("2_bj7yn")
+shader_parameter/is_active = false
 
 [node name="EnemyYellow" instance=ExtResource("1_elcgm")]
-_move_speed = 240.0
+_health = 30
+_damage = 5
+_invincibility_cooldown = 1.35
 
-[node name="Sprite2D" parent="." index="0"]
-region_rect = Rect2(257.542, 513.853, 62.0725, 60.5303)
+[node name="Texture" parent="." index="0"]
+material = SubResource("ShaderMaterial_0wj57")
+region_rect = Rect2(256, 513, 64, 60)

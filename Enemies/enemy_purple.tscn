@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnjjrfommq8n5"]
+[gd_scene load_steps=4 format=3 uid="uid://cnjjrfommq8n5"]
 
 [ext_resource type="PackedScene" uid="uid://dnktthgl5t610" path="res://Enemies/enemy_template.tscn" id="1_5bstr"]
+[ext_resource type="Shader" path="res://Effects/flash.gdshader" id="2_tq6yg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr463"]
+resource_local_to_scene = true
+shader = ExtResource("2_tq6yg")
+shader_parameter/is_active = false
 
 [node name="EnemyPurple" instance=ExtResource("1_5bstr")]
+_health = 45
 _enemy_type = "chase_and_dash"
-_move_speed = 256.0
+_move_speed = 224.0
+_damage = 9
+_invincibility_cooldown = 1.25
 
-[node name="Sprite2D" parent="." index="0"]
-region_rect = Rect2(128.842, 512.347, 64.6131, 60.8566)
+[node name="Texture" parent="." index="0"]
+material = SubResource("ShaderMaterial_cr463")
+region_rect = Rect2(128, 515, 66, 61)
